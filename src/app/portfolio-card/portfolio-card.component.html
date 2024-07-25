@@ -1,1 +1,17 @@
-<p>portfolio-card works!</p>
+<div>
+    <span>
+        <p>Account #</p>
+    </span>
+    <span>
+        <p>Total Stocks</p>
+        {{stockTotal | async}}
+    </span>
+    <span>
+        <p>Total Bonds</p>
+        {{bondTotal | async}}
+    </span>
+    <span>
+        <p>Total</p>
+        {{$total | async}}
+    </span>
+</div>

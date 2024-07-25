@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +29,18 @@ export class StockDataService {
         });
       })
     );
+  }
+
+  getStocksTotal(): Observable<number> {
+    return this.http
+      .get<number>(this.stockServiceUrl + 'mystocks')
+      .pipe(take(1));
+  }
+
+  getBondsTotal(): Observable<number> {
+    return this.http
+      .get<number>(this.stockServiceUrl + 'mybonds')
+      .pipe(take(1));
   }
 }
 
