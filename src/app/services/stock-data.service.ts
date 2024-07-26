@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +31,13 @@ export class StockDataService {
     );
   }
 
+  getStockById(id: number): Observable<Stock> {
+    return this.http.get<Stock>(this.stockServiceUrl + 'stocks/' + id).pipe(
+      take(1),
+      tap((value) => console.log('got stock ' + value.symbol + ' by ID ' + id))
+    );
+  }
+
   getStocksTotal(): Observable<number> {
     return this.http
       .get<number>(this.stockServiceUrl + 'mystocks')
@@ -45,6 +52,7 @@ export class StockDataService {
 }
 
 export interface Stock {
+  id: number;
   symbol: string;
   price: number;
   bid: number;
