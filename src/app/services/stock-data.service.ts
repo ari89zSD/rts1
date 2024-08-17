@@ -9,16 +9,6 @@ import { map, take, tap } from 'rxjs/operators';
 export class StockDataService {
   private stockServiceUrl = 'http://localhost:8080/';
 
-  //private stocksSubject: BehaviorSubject<Stock[]> = new BehaviorSubject([]);
-
-  //stocks$: Observable<Stock[]> = this.stocksSubject.asObservable();
-
-  // updateData(): Observable<Stock> {
-  //   return this.getStocks().do((stock) => {
-  //     this.stocksSubject.next(stock);
-  //   });
-  // }
-
   constructor(private http: HttpClient) {}
 
   getStocks(): Observable<Stock[]> {
