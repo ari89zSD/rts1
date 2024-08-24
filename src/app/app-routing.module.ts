@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'stocks-table', component: StocksTableCardComponent },
   { path: 'portfolio', component: PortfolioCardComponent },
   { path: 'trade/:id', component: TradeCardComponent },
+  { path: '', redirectTo: '/stocks-table', pathMatch: 'full' },
 ];
 
 @NgModule({

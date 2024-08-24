@@ -1,4 +1,14 @@
 <div>
-    <span>symbol: {{($stock | async).symbol }}</span>
-    <span>price: {{($stock | async).price }}</span>
+    <div *ngIf="$stock | async; let stock">
+        <span>symbol: {{stock.symbol}}</span>
+        <span>price: {{stock.price}}</span>
+    </div>
+    <form #tradeTicket="ngForm" (ngSubmit)="onClickSubmit(tradeTicket.value)">
+        <input type="hidden" name="symbol" [ngModel]="stock.symbol">
+        <input type="number" name="quantity" placeholder="Enter Number of Shares" ngModel />
+        <br />
+        <input type="number" name="price" placeholder="Bid Price" ngModel />
+        <br />
+        <input type="submit" value="Buy">
+    </form>
 </div>
