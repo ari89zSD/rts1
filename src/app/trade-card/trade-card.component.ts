@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Stock, StockDataService } from '../services/stock-data.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -7,7 +7,6 @@ import {
   Transaction,
   TransactionService,
 } from '../services/transaction.service';
-import { StockAccountService } from '../services/stock-account.service';
 
 @Component({
   selector: 'trade-card',

@@ -12,6 +12,8 @@ export class StocksTableCardComponent implements OnInit {
 
   stocksDataSource = new MatTableDataSource<Stock>();
 
+  interval: any;
+
   displayedColumns: string[] = [
     'symbol',
     'price',
@@ -22,8 +24,15 @@ export class StocksTableCardComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.refreshStocksData();
+
+    this.interval = setInterval(() => {
+      this.refreshStocksData();
+    }, 5000);
+  }
+
+  private refreshStocksData() {
     this.stockService.getStocks().subscribe((data) => {
-      console.log('Received in service: ' + data);
       this.stocksDataSource.data = data;
     });
   }
