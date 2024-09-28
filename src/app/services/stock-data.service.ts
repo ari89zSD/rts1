@@ -11,14 +11,25 @@ export class StockDataService {
 
   constructor(private http: HttpClient) {}
 
-  getStocks(): Observable<Stock[]> {
-    return this.http.get<Stock[]>(this.stockServiceUrl + 'stocks').pipe(
-      map((stocks) => {
-        return stocks.map((stock) => {
-          return { ...stock } as Stock;
-        });
-      })
-    );
+  stocks: Stock[];
+
+  public stocksSubject = new BehaviorSubject<Stock[]>([]);
+  public stocks$: Observable<Stock[]> = this.stocksSubject.asObservable();
+
+  getStocks() {
+    this.http
+      .get<Stock[]>(this.stockServiceUrl + 'stocks')
+      .pipe(
+        map((stocks) => {
+          return stocks.map((stock) => {
+            return { ...stock } as Stock;
+          });
+        })
+      )
+      .subscribe((stocks) => {
+        this.stocks = stocks;
+        this.stocksSubject.next(this.stocks); // Notify subscribers when stocks are fetched
+      });
   }
 
   getStockById(id: number): Observable<Stock> {
